@@ -67,7 +67,7 @@ const CameraScreen: React.FC<{ navigation: CameraNavigationProp }> = ({ navigati
 
   if (device == null) return <ActivityIndicator size="large" color="#00ff00" />;
   //const devices = useCameraDevices();
-  //const device = devices.find((d) => d.position === 'front'); // 후면 카메라 장치를 선택
+  //const device = devices.find((d) => d.position === 'front');
 
   const captureAndUploadImage = async () => {
     if (!cameraRef.current || !device) {
