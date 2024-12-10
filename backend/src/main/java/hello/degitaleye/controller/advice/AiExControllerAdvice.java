@@ -33,7 +33,7 @@ public class AiExControllerAdvice {
     }
 
     @ExceptionHandler(MissingServletRequestPartException.class)
-    public ResponseEntity<ErrorResult> missingRequestValueExHandle(MissingServletRequestPartException e) {
+    public ResponseEntity<ErrorResult> notSupportedExceptionHandle(MissingServletRequestPartException e) {
         log.error("[exception-handle] ex", e);
         return ResponseEntity
                 .badRequest()
@@ -41,6 +41,10 @@ public class AiExControllerAdvice {
                         ms.getMessage("error.400", null, getContextLocale()),
                         ms.getMessage("solution.translate", null, getContextLocale())));
     }
+
+
+
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResult> exHandle(Exception e) {

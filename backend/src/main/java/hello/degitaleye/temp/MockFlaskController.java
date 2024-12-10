@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
-// TODO /send_check mock 만들기
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -22,10 +21,6 @@ public class MockFlaskController {
     @Value("${file.dir}")
     private String fileDir; // 파일 저장
 
-   /*
-    send_per_check: only image
-    send_check: image + text
-     */
 
     /**
      * 테스트용 플라스크 서버 역할 -> 나중에 삭제
@@ -53,7 +48,7 @@ public class MockFlaskController {
     /**
      * 파일 저장 메서드
      *
-     * @param file
+     * @param file 저장할 멀티파트 파일
      */
     private void saveFile(MultipartFile file) {
         if (file != null && !file.isEmpty()) {
