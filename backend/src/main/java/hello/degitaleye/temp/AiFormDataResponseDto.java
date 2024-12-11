@@ -1,9 +1,9 @@
-package hello.degitaleye.dto;
+package hello.degitaleye.temp;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-// TODO 임시 dto -> 규칙 정해야함
+
 @Getter
 @NoArgsConstructor
 public class AiFormDataResponseDto {

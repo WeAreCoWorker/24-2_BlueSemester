@@ -1,0 +1,56 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - run: touch ./src/main/resources/application-API-KEY.properties
+      - run: echo "${{ secrets.EXTERNAL_KEY }}" > ./src/main/resources/application-API-KEY.properties
+      - run: cat ./src/main/resources/application-API-KEY.properties
+
+      - run: touch ./src/main/resources/application-uri.properties
+      - run: echo "${{ secrets.EXTERNAL_URL }}" > ./src/main/resources/application-uri.properties
+      - run: cat ./src/main/resources/application-uri.properties
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
+        # 현재 시간 가져오기
+      - name: Get current time
+        uses: josStorer/get-current-time@v2.0.2
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss
+          utcOffset: "+09:00"
+
+      # 배포용 패키지 경로 저장
+      - name: Set artifact
+        run: echo "artifact=$(ls ./build/libs)" >> $GITHUB_ENV
+
+      # AWS
+      - name: AWS Deploy
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: digital-eye-beanstalk
+          environment_name: Digital-eye-beanstalk-env-1
+          version_label: github-action-${{steps.current-time.outputs.formattedTime}}
+          region: ap-northeast-2
+          deployment_package: ./build/libs/${{env.artifact}}
