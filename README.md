@@ -11,7 +11,7 @@
     <br />
     <a href="https://www.instagram.com/digitaleye___">Digital Eye Instagram</a>
     <br />
-    <a href="https://ace.ajou.ac.kr/ace/paran/meeting.do?mode=view&articleNo=328012&article.offset=0&articleLimit=12&srSearchVal=%ED%8C%94%EB%8B%AC%EA%B4%80#!/list">중간교류회 발표자료</a>
+    <a href="https://ace.ajou.ac.kr/ace/paran/conference.do?mode=view&articleNo=328012&article.offset=24&articleLimit=12#!/list">성과발표</a>
   </p>
 
 ---
